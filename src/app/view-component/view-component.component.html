@@ -1,0 +1,84 @@
+<div >
+
+
+
+    <h1 class="modal-title fs-4" id="exampleModalLabel" style="margin-right: auto">
+        Report
+    </h1>
+    <br>
+    <form class="example-form" [formGroup]="reportDetail" style="margin: 2%; ">
+    <div class=col-md-11 style="margin-left: 20px;">
+        <input type="text" #queryInput formControlName="query" class="form-control" id="query"
+        placeholder="query">
+        <br>
+        <button class="btn btn-primary" style="margin-left: 2px;" (click)="executeQuery(queryInput.value)">get report</button>
+        &nbsp;
+        <button *ngIf="result!=null"  class="btn btn-primary" style="margin-left: 2px;" (click)="exportAsXLSX()">Download as Excel</button>
+        &nbsp;
+        <button *ngIf="result!=null"  class="btn btn-primary" style="margin-left: 2px;" (click)="generatePDF()">Download as PDF</button>
+        <br>
+      </div>
+      </form>
+      <br>
+      <div class="container">
+    <table class="table "  id="content" #content style="margin-left: 40px;" *ngIf="result!=null">
+        <thead>
+            <th *ngFor="let config of reportColumnConfigsview |  orderBy:'orderBy'" [style.width.%]="config['width']"
+
+
+                (click)="sortTable(config.columnKey)">
+                {{ config.columnName }}
+
+            </th>
+            <!-- <th>sdsd</th>
+          <th>sdsds</th>
+          <th>sdsds</th>
+          <th (click)="sortByName('Sort')">Sort</th>
+          <th  >last</th> -->
+        </thead>
+        <tbody>
+            <tr *ngFor="let config1 of getItems()" [style.width.px]="config1['width']">
+                <ng-container *ngFor="let config of reportColumnConfigsview">
+                  <td>{{ config1[config.columnKey] }}</td>
+                </ng-container>
+              </tr>
+
+        </tbody>
+        <tfoot>
+            <tr>
+              <td *ngFor="let config of reportColumnConfigsview">
+                <ng-container *ngIf="config.isSumRequired && config.columnType==='number'">
+                  {{ calculateSum(config?.columnKey) }}
+                </ng-container>
+                <ng-container *ngIf="config.isAvgRequired && config.columnType==='number'">
+                    {{ calculateAverage(config?.columnKey) }}
+                  </ng-container>
+              </td>
+            </tr>
+          </tfoot>
+    </table>
+  </div>
+    <div style="display: flex; justify-content: center; margin-right: 20px;">
+        <button class="btn btn-primary" style="margin-right: 10px;" (click)="currentPage = 1" [disabled]="currentPage === 1">First</button>
+        <button  class="btn btn-primary" style="margin-right: 10px;" (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }}</span>
+        <button class="btn btn-primary" style="margin-right: 10px; margin-left: 10px;" (click)="currentPage = currentPage + 1" [disabled]="currentPage === totalPage">Next</button>
+        <button class="btn btn-primary" style="margin-right: 10px;" (click)="currentPage = totalPage" [disabled]="currentPage === totalPage">Last</button>
+      </div>
+      <!-- <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+        *ngIf="result!=null"
+          [collectionSize]="collectionSize"
+          [(page)]="page"
+          [pageSize]="pageSize"
+
+        >
+        </ngb-pagination>
+
+        <select class="form-select" *ngIf="result!=null" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+          <option [ngValue]="2">2 items per page</option>
+          <option [ngValue]="4">4 items per page</option>
+          <option [ngValue]="6">6 items per page</option>
+        </select>
+      </div> -->
+</div>

@@ -1,0 +1,169 @@
+
+<h1 class="modal-title fs-4" >Edit report</h1>
+
+        <form class="example-form" [formGroup]="reportDetail" style="margin:2%;">
+          <div class="row">
+            <div class=col-md-4>
+              <label for="exampleInputEmail1" class="form-label">Report id</label>
+              <input type="text" formControlName="reportId" class="form-control" id="reportId"
+                placeholder="report id"  aria-describedby="emailHelp">
+            </div>
+            <div class=col-md-4>
+              <label for="exampleInputEmail1" class="form-label">Report name</label>
+              <input type="text" formControlName="reportName" class="form-control" id="reportName"
+              placeholder="report name" aria-describedby="emailHelp">
+            </div>
+            <div class=col-md-4>
+              <label for="exampleInputPassword1" class="form-label">Report type</label>
+              <input type="text"  formControlName="reportType" class="form-control"
+              id="reportType" placeholder="report type">
+            </div>
+            <div class=col-md-4>
+              <label for="exampleInputPassword1" class="form-label">Report description</label>
+              <input type="text" formControlName="reportDesc" class="form-control" id="reportDesc"
+              placeholder="Description">
+            </div>
+            <div class=col-md-4>
+              <label for="exampleInputPassword1" class="form-label">Status</label>
+              <input type="text" formControlName="status" class="form-control" id="status"
+              placeholder="status">
+            </div>
+            <div class=col-md-4>
+              <label for="exampleInputPassword1" class="form-label">Order by</label>
+              <input type="number" formControlName="orderBy" class="form-control" id="orderBy"
+              placeholder="Order by"
+              >
+            </div>
+            <div style="margin-top: 1%; margin-left: 1%;" class="col-md-12 form-check">
+              <input type="checkbox" formControlName="columnWiseSum" class="form-check-input" id="columnWiseSum">
+              <input type="hidden" name="columnWiseSum">
+              <label class="form-check-label" for="columnWiseSum">Column wise sum</label>
+            </div>
+            <div style="margin-top: 1%; margin-left: 1%;" class="col-md-12 form-check">
+              <input type="checkbox" formControlName="columnWiseAvg" class="form-check-input" id="columnWiseAvg">
+              <input type="hidden" name="columnWiseAvg">
+              <label class="form-check-label" for="columnWiseAvg">Column wise avg</label>
+            </div>
+          </div>
+          <h4 style="margin-top: 1rem;">Report columns</h4>
+
+          <div>
+            <table formArrayName="reportColumnConfigs" style="margin: 2%;width: 96%; "
+            class="mat-table cdk-table mat-elevation-z8 table-bordered">
+            <thead style="text-align:center">
+                <tr>
+                    <td style="width: 6%; justify-content: center;">Column id</td>
+                    <td style="width: 9%; justify-content: center;">Column name</td>
+                    <td style="width: 6%; justify-content: center;">Column key</td>
+                    <td style="width: 6%; justify-content: center;">Column Type</td>
+                    <td style="width: 8%; justify-content: center;">Width</td>
+                    <td style="width: 10%; justify-content: center;">Report id</td>
+                    <td style="width: 8%; justify-content: center;">Order by</td>
+                    <td>Is sum required</td>
+                    <td>Is avg required</td>
+                    <td>is count required</td>
+                    <td>Group by</td>
+                    <td>Group based sum</td>
+                    <td  style="width: 7%;">Action</td>
+                </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let config of reportColumnConfig.controls; let i=index" [formGroupName]="i">
+              <!-- <div > -->
+                <!-- {{config}} -->
+                <!-- <div class="row"> -->
+                  <td>
+                    <!-- <label for="exampleInputEmail1" class="form-label">Column id</label> -->
+                    <input type="text" formControlName="columnId" class="form-control"
+                    placeholder="Id">
+                  </td>
+                  <td >
+                    <!-- <label for="exampleInputEmail1" class="form-label">Column name</label> -->
+                    <input type="text" formControlName="columnName" class="form-control"
+                    placeholder="Name">
+                  </td>
+                  <td >
+                    <!-- <label for="exampleInputEmail1" class="form-label">Column key</label> -->
+                    <input type="text" formControlName="columnKey" class="form-control"
+                    placeholder="Key">
+                  </td>
+                  <td >
+                    <!-- <label for="exampleInputEmail1" class="form-label">Column type</label> -->
+                    <input type="text" formControlName="columnType" class="form-control"
+                    placeholder="Type"
+                    >
+                  </td>
+                  <td>
+                    <!-- <label for="exampleInputEmail1" class="form-label">Width</label> -->
+                    <input type="number" formControlName="width" class="form-control"
+                    placeholder="Width"
+                    >
+                  </td>
+                  <td>
+                    <!-- <label for="exampleInputEmail1" class="form-label">Report id</label> -->
+                    <input type="text" formControlName="reportId" class="form-control"
+                    placeholder="Report id">
+                  </td>
+                  <td >
+                    <!-- <label for="exampleInputEmail1" class="form-label">Order by</label> -->
+                    <input type="number" formControlName="orderBy" class="form-control"
+                    placeholder="Order by"
+                    >
+                  </td>
+                  <td>
+                    <input type="checkbox" style="margin-left: 40% !important;" formControlName="isSumRequired" class="form-check-input">
+                    <input type="hidden" name="isSumRequired" value="0">
+                    <!-- <label class="form-check-label" for="isSumRequired">Is sum required</label> -->
+                  </td>
+                  <td >
+                    <input type="checkbox" style="margin-left: 40% !important;" formControlName="isAvgRequired" class="form-check-input">
+                    <input type="hidden" name="isAvgRequired" value="0">
+                    <!-- <label class="form-check-label" for="isAvgRequired">Is avg required</label> -->
+                  </td>
+                  <td>
+                    <input type="checkbox" style="margin-left: 40% !important;" formControlName="isCountRequired" class="form-check-input">
+                    <input type="hidden" name="isCountRequired" value="0">
+                    <!-- <label class="form-check-label" for="isCountRequired">Is count required</label> -->
+                  </td>
+                  <td >
+                    <input type="checkbox" style="margin-left: 40% !important;" formControlName="groupBy" class="form-check-input">
+                    <input type="hidden" name="groupBy" value="0">
+                    <!-- <label class="form-check-label" for="groupBy">Group by</label> -->
+                  </td>
+                  <td >
+                    <input type="checkbox" style="margin-left: 40% !important;" formControlName="groupBasedSum" class="form-check-input">
+                    <input type="hidden" name="groupBasedSum" value="0">
+                    <!-- <label class="form-check-label" for="groupBasedSum">Group based sum</label> -->
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger" style="width: 100px !important;
+                    height: 30px !important;
+                    font-size: .8rem !important;
+                    " (click)="removeColumn(i)">Remove
+                      </button>
+                  </td>
+                  </tr>
+                </tbody>
+
+                </table>
+
+                <button type="button" class=" btn btn-primary" (click)="push()">Add
+                  Column</button>
+            </div>
+
+            <br>
+
+            <div class=col-md-11 style="margin-left: 20px;">
+              <input type="text" #queryInput formControlName="query" class="form-control" id="query"
+              placeholder="query">
+              <br>
+              <button class="btn btn-primary" style="margin-left: 2px;"  (click)="executeQuery(queryInput.value)">Test Connection</button>
+            </div>
+
+            </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success" routerLink="" (click)="updateReports()" style="margin-right: 2%;
+          margin-bottom: 2%;">Update
+            report</button>
+        </div>
+

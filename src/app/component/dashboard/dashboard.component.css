@@ -1,0 +1,7 @@
+.column{
+    width: 20%;
+    flex-direction: column;
+}
+.sf{
+    flex-direction: column;
+}

@@ -1,0 +1,631 @@
+<!-- <div class="modal fade" id="addReports" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+<!-- <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header"> -->
+
+<h1 class="modal-title fs-4" id="exampleModalLabel" style="padding-top: 20px">
+  Add report
+</h1>
+<!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body"> -->
+<form class="example-form" [formGroup]="reportDetail" style="margin: 2%">
+  <div class="row">
+    <div class="col-md-4">
+      <label for="exampleInputEmail1" class="form-label">Report id</label>
+      <input
+        type="text"
+        #value
+        formControlName="reportId"
+        class="form-control"
+        id="reportId"
+        placeholder="report id"
+        aria-describedby="emailHelp"
+        (change)="getReportId(value.value)"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="exampleInputEmail1" class="form-label">Report name</label>
+      <input
+        type="text"
+        formControlName="reportName"
+        class="form-control"
+        id="reportName"
+        placeholder="report name"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="exampleInputPassword1" class="form-label">Report type</label>
+      <input
+        type="text"
+        formControlName="reportType"
+        class="form-control"
+        id="reportType"
+        placeholder="report type"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="exampleInputPassword1" class="form-label"
+        >Report description</label
+      >
+      <input
+        type="text"
+        formControlName="reportDesc"
+        class="form-control"
+        id="reportDesc"
+        placeholder="Description"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="exampleInputPassword1" class="form-label">Status</label>
+      <input
+        type="text"
+        formControlName="status"
+        class="form-control"
+        id="status"
+        placeholder="status"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="exampleInputPassword1" class="form-label">Order by</label>
+      <input
+        type="number"
+        formControlName="orderBy"
+        class="form-control"
+        id="orderBy"
+        placeholder="Order by"
+      />
+    </div>
+    <div style="margin-top: 1%; margin-left: 1%" class="col-md-12 form-check">
+      <input
+        type="checkbox"
+        formControlName="columnWiseSum"
+        class="form-check-input"
+        id="columnWiseSum"
+      />
+      <input type="hidden" name="columnWiseSum" />
+      <label class="form-check-label" for="columnWiseSum"
+        >Column wise sum</label
+      >
+    </div>
+    <div style="margin-top: 1%; margin-left: 1%" class="col-md-12 form-check">
+      <input
+        type="checkbox"
+        formControlName="columnWiseAvg"
+        class="form-check-input"
+        id="columnWiseAvg"
+      />
+      <input type="hidden" name="columnWiseAvg" />
+      <label class="form-check-label" for="columnWiseAvg"
+        >Column wise avg</label
+      >
+    </div>
+  </div>
+  <h4 style="margin-top: 1rem">Report columns</h4>
+
+  <div>
+    <table
+      formArrayName="reportColumnConfigs"
+      style="margin: 2%; width: 96%"
+      class="mat-table cdk-table mat-elevation-z8 table-bordered"
+    >
+      <thead style="text-align: center">
+        <tr>
+          <td style="width: 6%; justify-content: center">Column id</td>
+          <td style="width: 10%; justify-content: center">Column name</td>
+          <td style="width: 10%; justify-content: center">Column key</td>
+          <td style="width: 10%; justify-content: center">Column Type</td>
+          <td style="width: 6%; justify-content: center">Width</td>
+          <td style="width: 8%; justify-content: center">Report id</td>
+          <td style="width: 8%; justify-content: center">Order by</td>
+          <td style="width: 4%; justify-content: center">Is sum required</td>
+          <td style="width: 4%; justify-content: center">Is avg required</td>
+          <td style="width: 4%; justify-content: center">is count required</td>
+          <td style="width: 4%; justify-content: center">Group by</td>
+          <td style="width: 4%; justify-content: center">Group based sum</td>
+          <td style="width: 7%">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let config of reportColumnConfig.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <!-- <div > -->
+          <!-- {{config}} -->
+          <!-- <div class="row"> -->
+          <td>
+            <!-- <label for="exampleInputEmail1" class="form-label">Column id</label> -->
+            <input
+              type="text"
+              formControlName="columnId"
+              class="form-control"
+              placeholder="Id"
+            />
+          </td>
+          <td>
+            <!-- <label for="exampleInputEmail1" class="form-label">Column name</label> -->
+            <input
+              type="text"
+              formControlName="columnName"
+              class="form-control"
+              placeholder="Name"
+            />
+          </td>
+          <td>
+            <!-- <label for="exampleInputEmail1" class="form-label">Column key</label> -->
+            <input
+              type="text"
+              formControlName="columnKey"
+              class="form-control"
+              placeholder="Key"
+            />
+          </td>
+          <td>
+            <!-- <label for="exampleInputEmail1" class="form-label">Column type</label> -->
+            <input
+              type="text"
+              formControlName="columnType"
+              class="form-control"
+              placeholder="Type"
+            />
+          </td>
+          <td>
+            <!-- <label for="exampleInputEmail1" class="form-label">Width</label> -->
+            <input
+              type="number"
+              formControlName="width"
+              class="form-control"
+              placeholder="Width"
+            />
+          </td>
+          <td>
+            <!-- <label for="exampleInputEmail1" class="form-label">Report id</label> -->
+            <input
+              type="text"
+              formControlName="reportId1"
+              class="form-control"
+              placeholder="Report id"
+            />
+          </td>
+          <td>
+            <!-- <label for="exampleInputEmail1" class="form-label">Order by</label> -->
+            <input
+              type="number"
+              formControlName="orderBy1"
+              class="form-control"
+              placeholder="Order by"
+            />
+          </td>
+          <td>
+            <input
+              type="checkbox"
+              style="margin-left: 40% !important"
+              formControlName="isSumRequired"
+              class="form-check-input"
+            />
+            <input type="hidden" name="isSumRequired" value="0" />
+            <!-- <label class="form-check-label" for="isSumRequired">Is sum required</label> -->
+          </td>
+          <td>
+            <input
+              type="checkbox"
+              style="margin-left: 40% !important"
+              formControlName="isAvgRequired"
+              class="form-check-input"
+            />
+            <input type="hidden" name="isAvgRequired" value="0" />
+            <!-- <label class="form-check-label" for="isAvgRequired">Is avg required</label> -->
+          </td>
+          <td>
+            <input
+              type="checkbox"
+              style="margin-left: 40% !important"
+              formControlName="isCountRequired"
+              class="form-check-input"
+            />
+            <input type="hidden" name="isCountRequired" value="0" />
+            <!-- <label class="form-check-label" for="isCountRequired">Is count required</label> -->
+          </td>
+          <td>
+            <input
+              type="checkbox"
+              style="margin-left: 40% !important"
+              formControlName="groupBy"
+              class="form-check-input"
+            />
+            <input type="hidden" name="groupBy" value="0" />
+            <!-- <label class="form-check-label" for="groupBy">Group by</label> -->
+          </td>
+          <td>
+            <input
+              type="checkbox"
+              style="margin-left: 40% !important"
+              formControlName="groupBasedSum"
+              class="form-check-input"
+            />
+            <input type="hidden" name="groupBasedSum" value="0" />
+            <!-- <label class="form-check-label" for="groupBasedSum">Group based sum</label> -->
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-danger"
+              style="
+                width: 100px !important;
+                height: 30px !important;
+                font-size: 0.8rem !important;
+              "
+              (click)="removeColumn(i)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button
+      type="button"
+      style="margin-left: 25px"
+      class="btn btn-primary"
+      (click)="push1()"
+    >
+      Add Column
+    </button>
+
+    <br />
+    <!-- <div>
+
+                 <br>
+                  <input  [(ngModel)]="queryInput" [ngModelOptions]="{standalone: true}" style="width:96%; margin-left: 25PX" placeholder="Enter query">
+                  &nbsp;
+                  <br>
+                  <br>
+                   <button class="btn btn-primary" style="margin-left: 25px;"  (click)="executeQuery()">Test Connection</button>
+                   <ul>
+                    <li *ngFor="let item of data">{{ item }}</li> -->
+    <!-- </ul>
+                  </div> -->
+    <br />
+    <!-- <mat-form-field>
+                    <mat-label>Select Database</mat-label>
+                    <mat-select [(ngModel)]="selectedValue" name="dbName">
+                      <mat-option *ngFor="let d of db" [value]="dbName.value">
+                        {{d.viewValue}}
+                      </mat-option>
+                    </mat-select> -->
+    <!-- </mat-form-field> -->
+
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      style="position: absolute; margin-left: 50px"
+    >
+      Connect to a Datasource
+    </button>
+
+    <form
+      class="example-form"
+      [formGroup]="databases"
+      style="margin-left: 200px"
+    >
+      <select
+        class="form-select"
+        #dropdown
+        aria-label="Default select example"
+        style="width: 40%; margin-bottom: 25px; margin-left: 150px"
+        (change)="showTables(dropdown.value)"
+      >
+        <option selected>Select database</option>
+        <option *ngFor="let item of str">{{ item }}</option>
+      </select>
+    </form>
+
+    <ng-select
+      placeholder="Query Tool"
+      [(ngModel)]="selectedKeyword"
+      style="margin-left: 350px; width: 33%"
+      [ngModelOptions]="{ standalone: true }"
+      (change)="selectKeyword()"
+    >
+      <ng-option *ngFor="let keyword of keywords" [value]="keyword">{{
+        keyword
+      }}</ng-option>
+    </ng-select>
+    <div *ngIf="selectedKeyword == 'WHERE'">
+      <ng-select
+        placeholder="where"
+        [(ngModel)]="selectedWhere"
+        style="margin-left: 350px; width: 33%"
+        [ngModelOptions]="{ standalone: true }"
+        (change)="selectWhere()"
+
+      >
+        <ng-option *ngFor="let w of where" [value]="w">{{ w }}</ng-option>
+      </ng-select>
+    </div>
+    &nbsp;
+
+    <ng-select
+      placeholder="Joins"
+      [(ngModel)]="selectedJoin"
+      style="margin-left: 350px; width: 33%"
+      [ngModelOptions]="{ standalone: true }"
+      (change)="selectJoin()"
+    >
+      <ng-option *ngFor="let join of joins" [value]="join">{{
+        join
+      }}</ng-option>
+    </ng-select>
+
+    <div class="container">
+      <div
+        id="jegan"
+        class="d-flex flex-column bd-highlight mb-3"
+        *ngIf="tables.length > 0"
+      >
+        <h6>Tables</h6>
+        <div *ngFor="let table of List; let i = index">
+          <label class="jeera">
+            <input
+              class="mohan"
+              type="checkbox"
+              [checked]="table.checked"
+              (change)="toggleTable(table)"
+            />
+            {{ table.name }}
+          </label>
+        </div>
+        <form
+          class="example-form"
+          [formGroup]="table"
+          style="
+            margin-left: 200px;
+            position: absolute;
+            width: 55%;
+            display: flex;
+            justify-content: space-evenly;
+          "
+        >
+          <!-- <div *ngFor="let table of selectedTables1">
+           <app-multi-select-dropdown style="margin-left: 0px;" [list]=table.columns
+              (shareCheckedList)="shareCheckedList($event)"
+              (shareIndividualCheckedList)="shareIndividualCheckedList($event)">
+            </app-multi-select-dropdown>
+          </div> -->
+          <div *ngFor="let table of selectedTables1">
+            <h6>{{ table.tableName }}</h6>
+            <ng-select
+              placeholder="Select columns"
+              [(ngModel)]="selectedColumns[table.tableName]"
+              [ngModelOptions]="{ standalone: true }"
+              [multiple]="true"
+              (change)="generateQuery()"
+            >
+              <ng-option
+                *ngFor="let column of table.columns"
+                [value]="column"
+                (change)="generateQuery()"
+                >{{ column.split(" ")[0] }}</ng-option
+              >
+            </ng-select>
+          </div>
+        </form>
+      </div>
+
+      <!-- <select class="form-select" #dropdown1  multiple aria-label="multiple select example" style="width: 40%;
+                    margin-left: 20px;" (change)="showColumns(dropdown1.value)">
+                      <option selected>Select Tables</option>
+                      <option  *ngFor="let item of tables1.tableName" >{{ item }}</option>
+                    </select> -->
+      <!-- <app-multi-select-dropdown [list]="List"
+        (shareCheckedList)="shareCheckedList($event)"
+        (shareIndividualCheckedList)="shareIndividualCheckedList($event)">
+      </app-multi-select-dropdown> -->
+
+      <!-- <select class="form-select" style="width: 30%; margin-top: 30px;">
+        <option selected>Select Columns</option>
+        <option *ngFor="let item of columns11
+                      ">{{ item }}</option>
+      </select> -->
+    </div>
+
+    <div class="col-md-11" class="angular_shakthi">
+      <input
+        type="text"
+        #queryInput
+        formControlName="query"
+        class="form-control"
+        id="query"
+        placeholder="query"
+      />
+      <br />
+      <button
+        class="btn btn-primary"
+        style="margin-left: 2px"
+        (click)="executeQuery(queryInput.value)"
+      >
+        Test Connection
+      </button>
+    </div>
+
+    <div class="modal-footer">
+      <!-- <button type="button" class=" btn btn-outline-danger" data-bs-dismiss="modal" >Close</button> -->
+      <button
+        type="button"
+        class="btn btn-success"
+        style="margin-right: 2%; margin-bottom: 2%"
+        routerLink=""
+        (click)="addReport()"
+        data-bs-dismiss="modal"
+      >
+        Add report
+      </button>
+    </div>
+  </div>
+</form>
+
+<!-- datasource popup -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6>Choose Connector</h6>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="cursor: pointer">
+        <div
+          data-bs-toggle="modal"
+          data-bs-target="#credentialModal"
+          class="card"
+          style="width: 30%"
+        >
+          <div class="card-body">
+            <img src="assets/postgressql svg.svg" alt="Image" />
+            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Connect</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- join modal -->
+
+<ng-template #joinModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Select Table</h4>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let column of columns11;let i =index ">
+        {{ column }}
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>
+
+<!-- database credentials -->
+<div
+  class="modal fade"
+  id="credentialModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Connect</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="example-form" [formGroup]="database" style="margin: 2%">
+          <img
+            src="assets/postgressql svg.svg"
+            alt="Image"
+            style="height: 150px; width: 150px; position: absolute"
+          />
+          <div
+            class="column"
+            style="
+              margin-left: 40%;
+              display: flex;
+              flex-direction: column;
+              width: 175%;
+            "
+          >
+            <div class="col-md-4">
+              <label for="exampleInputEmail1" class="form-label"
+                >IpAddress</label
+              >
+              <input
+                type="text"
+                formControlName="ipAddress"
+                class="form-control"
+                id="ipAddress"
+                placeholder="Ip Address"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="col-md-4">
+              <label for="exampleInputEmail1" class="form-label"
+                >Server Port</label
+              >
+              <input
+                type="text"
+                formControlName="serverPort"
+                class="form-control"
+                id="serverPort"
+                placeholder="Server port"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="col-md-4">
+              <label for="exampleInputPassword1" class="form-label"
+                >User name</label
+              >
+              <input
+                type="text"
+                formControlName="userName"
+                class="form-control"
+                id="userName"
+                placeholder="Username"
+              />
+            </div>
+            <div class="col-md-4">
+              <label for="exampleInputPassword1" class="form-label"
+                >Password</label
+              >
+              <input
+                type="text"
+                formControlName="password"
+                class="form-control"
+                id="Password"
+                placeholder="Password"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="databaseConnector()"
+        >
+          Connect
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- </div>
+    </div>
+  </div>
+</div> -->

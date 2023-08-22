@@ -1,0 +1,93 @@
+<div style="    padding-top: 10px;
+margin-left: 82%;">
+  <input type="text" #searchTxt [(ngModel)]="searchTerm" (keyup)="applyFilter(searchTxt.value)" placeholder="Search Reports">
+</div>
+
+
+<div
+  class=""
+  style="
+    margin-left: 0%;
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    margin-right: 0% !important;
+    right: 0% !important;
+    padding-top: 20px;
+  "
+>
+  <div style="overflow-x: scroll; width: 100%; text-align: center;">
+    <table class="table">
+      <thead>
+        <th>Report id</th>
+        <th>Report name</th>
+        <th>Report type</th>
+        <th>Report Desc</th>
+        <th>Status</th>
+        <th>Column wise sum</th>
+        <th>Column wise avg</th>
+        <th>Order by</th>
+        <!-- <th>Report column config</th> -->
+        <th style="width: 15%">Action</th>
+      </thead>
+      <tbody *ngFor="let report of reportList">
+        <tr>
+          <td>{{ report.reportId }}</td>
+          <td>{{ report.reportName }}</td>
+          <td>{{ report.reportType }}</td>
+          <td>{{ report.reportDesc }}</td>
+          <td>{{ report.status }}</td>
+          <td>{{ report.columnWiseSum }}</td>
+          <td>{{ report.columnWiseAvg }}</td>
+          <td>{{ report.orderBy }}</td>
+          <!-- <td>{{config.columnName}}</td>
+          <td>{{config.columnId}}</td>
+          <td>{{config.columnId}}</td>
+          <td>{{config.columnKey}}</td>
+          <td>{{config.columnType}}</td>
+          <td>{{config.width}}</td>
+          <td>{{config.reportId}}</td>
+          <td>{{config.orderBy}}</td>
+          <td>{{config.isSumRequired}}</td>
+          <td>{{config.isAvgRequired}}</td>
+          <td>{{config.isCountRequired}}</td>
+          <td>{{config.groupBy}}</td>
+          <td>{{config.groupBasedSum}}</td>  -->
+          <!-- <td> {{config.reportName}}</td> -->
+          <div style="    display: flex;
+          flex-direction: row;
+          padding-left: 27px;">
+            <td >
+              <a
+                routerLink="view"
+                (click)="showData(report)"
+              >
+              <i class="fa fa-eye" style="margin-left: 20px; color: blue;font-size: 20px"></i>
+            </a>
+            </td>
+            <a
+              data-bs-toggle="modal"
+              data-bs-target="#editReport"
+              routerLink="edit/:id"
+              (click)="editReports(report)"
+            >
+            <i class="fa fa-edit" style="margin-left: 20px; color: orange; font-size: 20px;
+                padding-top: 3px;"></i>
+          </a>
+            <a
+            
+              (click)="deleteReports(report)"
+            >
+            <i class="fa fa-trash" style="margin-left: 20px; color: red; font-size: 20px;
+             padding-top: 3px;"></i>
+          </a>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- View report Modal -->
+ 
+</div>

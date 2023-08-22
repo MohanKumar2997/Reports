@@ -1,0 +1,22 @@
+
+  <div class="container" *ngFor="let dt of array; let index = index">
+ <div class="row">
+    <div >
+        <button class="drop-toggle btn flat" (click)="showDropDown=!showDropDown" >
+            <span *ngIf="checkedList.length<=0" >columns</span>
+            <span *ngIf="checkedList.length>0">{{checkedList.join(', ')}}</span>
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <div class="drop-show" *ngIf="showDropDown">
+            <label *ngFor="let a of list; let i = index">
+                    <input type="checkbox" [(ngModel)]="a.checked"
+                        (change)="getSelectedValue(a.checked,a.name,i)"
+                        style="margin-right: 0.3rem;" />
+                    <span >{{a.name}}</span>
+            </label>
+        </div>
+    </div>
+  </div>
+  </div>
+
+
